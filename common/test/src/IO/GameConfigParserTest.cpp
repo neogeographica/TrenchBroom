@@ -30,6 +30,8 @@
 #include "Model/Tag.h"
 #include "Model/TagMatcher.h"
 
+#include <kdl/vector_set.h>
+
 #include <string>
 
 namespace TrenchBroom {
@@ -147,7 +149,8 @@ namespace TrenchBroom {
                     Path("gfx/palette.lmp"),
                     "wad",
                     Path(),
-                    {}),
+                    {},
+                    kdl::vector_set<IO::Path>()),
                 Model::EntityConfig(
                     { Path("Quake.fgd"), Path("Quoth2.fgd"), Path("Rubicon2.def"), Path("Teamfortress.fgd") },
                     { "bsp", "mdl" },
@@ -405,7 +408,8 @@ namespace TrenchBroom {
                     Path("pics/colormap.pcx"),
                     "_tb_textures",
                     Path(),
-                    {}),
+                    {},
+                    kdl::vector_set<IO::Path>()),
                 Model::EntityConfig(
                     { Path("Quake2.fgd") },
                     { "md2" },
@@ -729,7 +733,8 @@ namespace TrenchBroom {
                     {
                         "*_norm",
                         "*_gloss"
-                    }),
+                    },
+                    kdl::vector_set<IO::Path>()),
                 Model::EntityConfig(
                     { Path("Extras.ent") },
                     { "md3" },

@@ -82,13 +82,14 @@ namespace TrenchBroom {
                     rootDirectory == other.rootDirectory);
         }
 
-        TextureConfig::TextureConfig(const TexturePackageConfig& i_package, const PackageFormatConfig& i_format, const IO::Path& i_palette, const std::string& i_attribute, const IO::Path& i_shaderSearchPath, const std::vector<std::string>& i_excludes) :
+        TextureConfig::TextureConfig(const TexturePackageConfig& i_package, const PackageFormatConfig& i_format, const IO::Path& i_palette, const std::string& i_attribute, const IO::Path& i_shaderSearchPath, const std::vector<std::string>& i_excludes, const kdl::vector_set<IO::Path>& i_defaultCollections) :
         package(i_package),
         format(i_format),
         palette(i_palette),
         attribute(i_attribute),
         shaderSearchPath(i_shaderSearchPath),
-        excludes(i_excludes) {}
+        excludes(i_excludes),
+        defaultCollections(i_defaultCollections) {}
 
         TextureConfig::TextureConfig() = default;
 
@@ -98,7 +99,8 @@ namespace TrenchBroom {
                     palette == other.palette &&
                     attribute == other.attribute &&
                     shaderSearchPath == other.shaderSearchPath &&
-                    excludes == other.excludes);
+                    excludes == other.excludes &&
+                    defaultCollections == other.defaultCollections);
         }
 
         EntityConfig::EntityConfig(const IO::Path& i_defFilePath, const std::vector<std::string>& i_modelFormats, const Color& i_defaultColor) :

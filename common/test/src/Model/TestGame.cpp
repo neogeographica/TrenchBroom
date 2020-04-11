@@ -132,7 +132,8 @@ namespace TrenchBroom {
                     IO::Path("data/palette.lmp"),
                     "wad",
                     IO::Path(),
-                    {});
+                    {},
+                    kdl::vector_set<IO::Path>());
 
             IO::TextureLoader textureLoader(fileSystem, fileSearchPaths, textureConfig, logger);
             textureLoader.loadTextures(paths, textureManager);

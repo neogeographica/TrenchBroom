@@ -27,6 +27,8 @@
 #include "Model/GameEngineConfig.h"
 #include "Model/Tag.h"
 
+#include <kdl/vector_set.h>
+
 #include <set>
 #include <string>
 #include <vector>
@@ -89,8 +91,9 @@ namespace TrenchBroom {
             std::string attribute;
             IO::Path shaderSearchPath;
             std::vector<std::string> excludes; // Glob patterns used to match texture names for exclusion
+            kdl::vector_set<IO::Path> defaultCollections;
 
-            TextureConfig(const TexturePackageConfig& i_package, const PackageFormatConfig& i_format, const IO::Path& i_palette, const std::string& i_attribute, const IO::Path& i_shaderSearchPath, const std::vector<std::string>& i_excludes);
+            TextureConfig(const TexturePackageConfig& i_package, const PackageFormatConfig& i_format, const IO::Path& i_palette, const std::string& i_attribute, const IO::Path& i_shaderSearchPath, const std::vector<std::string>& i_excludes, const kdl::vector_set<IO::Path>& i_defaultCollections);
             TextureConfig();
 
             bool operator==(const TextureConfig& other) const;

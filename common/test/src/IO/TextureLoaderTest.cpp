@@ -30,6 +30,8 @@
 #include "IO/TextureLoader.h"
 #include "Model/GameConfig.h"
 
+#include <kdl/vector_set.h>
+
 #include <string>
 
 namespace TrenchBroom {
@@ -61,7 +63,8 @@ namespace TrenchBroom {
                     IO::Path("fixture/test/palette.lmp"),
                     "wad",
                     IO::Path(),
-                    {});
+                    {},
+                    kdl::vector_set<IO::Path>());
 
             auto logger = NullLogger();
             auto textureManager = Assets::TextureManager(0, 0, logger);
@@ -110,7 +113,8 @@ namespace TrenchBroom {
                         "*-jam",
                         "coffin2",
                         "czg_*"
-                    });
+                    },
+                    kdl::vector_set<IO::Path>());
 
             auto logger = NullLogger();
             auto textureManager = Assets::TextureManager(0, 0, logger);

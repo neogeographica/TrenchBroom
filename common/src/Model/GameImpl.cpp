@@ -61,6 +61,7 @@
 #include <kdl/string_format.h>
 #include <kdl/string_utils.h>
 #include <kdl/vector_utils.h>
+#include <kdl/vector_set.h>
 
 #include <string>
 #include <vector>
@@ -251,16 +252,21 @@ namespace TrenchBroom {
 
         std::vector<IO::Path> GameImpl::doExtractTextureCollections(const AttributableNode& node) const {
             const auto& property = m_config.textureConfig().attribute;
+            const auto& defaults = m_config.textureConfig().defaultCollections;
             if (property.empty()) {
-                return std::vector<IO::Path>(0);
+                return defaults.get_data();
             }
 
             const auto& pathsValue = node.attribute(property);
             if (pathsValue.empty()) {
-                return std::vector<IO::Path>(0);
+                return defaults.get_data();
             }
 
-            return IO::Path::asPaths(kdl::str_split(pathsValue, ";"));
+            const std::vector<IO::Path> paths = IO::Path::asPaths(kdl::str_split(pathsValue, ";"));
+            if (defaults.empty()) {
+                return paths;
+            }
+            return kdl::set_union(kdl::vector_set(paths), defaults);
         }
 
         void GameImpl::doUpdateTextureCollections(AttributableNode& node, const std::vector<IO::Path>& paths) const {

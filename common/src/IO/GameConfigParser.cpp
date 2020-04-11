@@ -28,6 +28,8 @@
 #include "Model/TagAttribute.h"
 #include "Model/TagMatcher.h"
 
+#include <kdl/vector_set.h>
+
 #include <string>
 #include <vector>
 
@@ -143,7 +145,7 @@ namespace TrenchBroom {
             expectStructure(value,
                             "["
                             "{'package': 'Map', 'format': 'Map'},"
-                            "{'attribute': 'String', 'palette': 'String', 'shaderSearchPath': 'String', 'excludes': 'Array'}"
+                            "{'attribute': 'String', 'palette': 'String', 'shaderSearchPath': 'String', 'excludes': 'Array', 'defaultCollections': 'Array'}"
                             "]");
 
             const Model::TexturePackageConfig packageConfig = parseTexturePackageConfig(value["package"]);
@@ -152,8 +154,9 @@ namespace TrenchBroom {
             const std::string& attribute = value["attribute"].stringValue();
             const Path shaderSearchPath(value["shaderSearchPath"].stringValue());
             const std::vector<std::string> excludes = std::vector<std::string>(value["excludes"].asStringList());
+            const kdl::vector_set<IO::Path> defaultCollections = kdl::vector_set(IO::Path::asPaths(value["defaultCollections"].asStringList()));
 
-            return Model::TextureConfig(packageConfig, formatConfig, palette, attribute, shaderSearchPath, excludes);
+            return Model::TextureConfig(packageConfig, formatConfig, palette, attribute, shaderSearchPath, excludes, defaultCollections);
         }
 
         Model::TexturePackageConfig GameConfigParser::parseTexturePackageConfig(const EL::Value& value) const {
